@@ -21,6 +21,8 @@
 #  ---> User session --> Logout
 #    Look into Flask-Session
 #
+#  ---> How to encrypt/password-protect database file?
+#
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
