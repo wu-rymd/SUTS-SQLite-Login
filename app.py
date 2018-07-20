@@ -21,8 +21,6 @@
 #  ---> User session --> Logout
 #    Look into Flask-Session
 #
-#  ---> How to encrypt/password-protect database file?
-#
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -38,9 +36,19 @@ from flask import Flask, render_template, request
 
 import sqlite3
 
+# hashlib:          hashing sensitive information
+
+import hashlib
+
 
 
 app = Flask(__name__)
+
+
+
+def hash(string):
+    return hashlib.sha256(string).hexdigest()
+
 
 
 
@@ -111,12 +119,18 @@ def auth():
         
         uEmail = request.form['email']        #  .form[] for POST method  (vs. .args[] for query parameters / GET method)
         uPass = request.form['pass']
+
+        
+        # hash into hexadecimal
+        uPass = hash(uPass)
+        
         
         gEmail = database.execute("SELECT email from credentials where email = (?)", [uEmail])
         emailExists = gEmail.fetchone()
 
         if emailExists:
             # does password match that of email?
+            # the password in the database has already been hashed
             gPass = database.execute("SELECT password from credentials where email = (?)", [uEmail])
             actualPass = gPass.fetchone()
 
@@ -152,6 +166,10 @@ def auth():
         uSchool = request.form['school']
         uEmail = request.form['email']
         uPass = request.form['pass']
+
+        
+        # hash into hexadecimal
+        uPass = hash(uPass)
 
 
         # checking to see if e-mail already exists in database
