@@ -3,7 +3,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
-#  Raymond Wu  /  Th 2018-07-19
+#  Raymond Wu  /  F 2018-07-20
 #
 #  Flask web application as proof-of-concept
 #    for simple SQLite database manipulation
